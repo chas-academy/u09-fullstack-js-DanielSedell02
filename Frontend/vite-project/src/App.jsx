@@ -20,15 +20,15 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/add-ad" element={<AddAd />} />
-            <Route path="/view-ads" element={<ViewAds />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/Annonser" element={<ViewAds />} />
+            <Route path="/Logga-in" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/About" element={<About />} />
+            <Route path="/Om-oss" element={<About />} />
           </Routes>
         </main>
         <footer className="bg-gray-100 text-center py-4 mt-8">
-          <p>&copy; 2024 Second Hand Perfume Store. All rights reserved.</p>
+          <p>&copy; 2024 ScentSaving. All rights reserved.</p>
         </footer>
       </div>
     </Router>
