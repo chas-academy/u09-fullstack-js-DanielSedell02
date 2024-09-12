@@ -1,12 +1,12 @@
 import React from "react";
+import RegisterForm from "../components/RegisterForm";
 
-const Register = () => {
+const RegisterPage = () => {
   return (
-    <div className="container mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4">Register</h1>
-      <p>Register Form</p>
+    <div>
+      <RegisterForm />
     </div>
   );
 };
 
-export default Register;
+export default RegisterPage;

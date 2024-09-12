@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Search } from "lucide-react";
 import LetterPullUp from "../components/letter-pullup";
+import LetterPullupComponent from "../components/letter-pullup";
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -13,7 +14,7 @@ const Home = () => {
   return (
     <div className="container mx-auto mt-8 px-4">
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold mb-4">Sök</h2>
+        <h2 className="text-xl font-semibold mb-4">Sök efter Parfymer</h2>
         <form onSubmit={handleSearch}>
           <div className="mb-4">
             <div className="relative">
@@ -41,15 +42,15 @@ const Home = () => {
 
       <div className="mt-8">
         <h1 className="text-3xl font-bold mb-6">
-          <LetterPullUp words="Welcome to ScentSaving" />
+          <LetterPullupComponent words="Välkommen till ScentSaving" />
         </h1>
-        <p className="text-lg mb-4">
-          Find your perfect scent at a great price! Browse our collection of
-          gently used, luxury perfumes.
+        <p className="text-lg mb-4 text-center">
+          Hitta din perfekta doft till ett fantastiskt pris! Utforska vår
+          samling av varsamt använda, lyxiga parfymer.
         </p>
-        <p className="mb-4">
-          Whether you're looking for a rare fragrance or want to give a new home
-          to a perfume you no longer use, you're in the right place.
+        <p className="mb-4 text-center">
+          Oavsett om du letar efter en sällsynt doft eller vill ge ett nytt hem
+          till en parfym du inte längre använder, har du kommit rätt.
         </p>
       </div>
 
@@ -65,7 +66,7 @@ const Home = () => {
               className="w-full h-auto object-cover"
             />
             <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-              <p className="text-white text-lg font-semibold">Discover More</p>
+              <p className="text-white text-lg font-semibold">Upptäck mera</p>
             </div>
           </div>
         ))}

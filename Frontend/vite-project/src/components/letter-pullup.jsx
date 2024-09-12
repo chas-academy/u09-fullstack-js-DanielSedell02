@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { cn } from "../lib/utils";
 
-export default function LetterPullup({ className, words = "", delay = 0.05 }) {
+function LetterPullupComponent({ className, words = "", delay = 0.05 }) {
   // Split the words into an array of letters, preserving spaces
   const letters = words.split("");
 
@@ -38,3 +38,4 @@ export default function LetterPullup({ className, words = "", delay = 0.05 }) {
     </div>
   );
 }
+export default LetterPullupComponent;

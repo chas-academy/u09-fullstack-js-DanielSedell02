@@ -1,12 +1,12 @@
 import React from "react";
+import LoginForm from "../components/LoginForm";
 
-const Login = () => {
+const LoginPage = () => {
   return (
-    <div className="container mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4">Login</h1>
-      <p>Login form</p>
+    <div>
+      <LoginForm />
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;

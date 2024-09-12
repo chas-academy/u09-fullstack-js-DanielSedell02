@@ -24,7 +24,7 @@ function App() {
             <Route path="/Logga-in" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/Om-oss" element={<About />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </main>
         <footer className="bg-gray-100 text-center py-4 mt-8">
