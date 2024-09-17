@@ -1,14 +1,30 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import AuthService from "/api/authService";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you'll add the logic to connect with your backend
-    console.log("Login attempt with:", { username, password });
+    setError("");
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/login",
+        {
+          username,
+          password,
+        }
+      );
+      localStorage.setItem("token", response.data.token);
+      navigate("/"); // Homepage
+    } catch (error) {
+      setError(error.response?.data?.message || "Inloggningen misslyckades");
+    }
   };
 
   return (
@@ -19,6 +35,7 @@ const LoginForm = () => {
             Logga in på ditt konto
           </h2>
         </div>
+        {error && <p className="text-red-500 text-center">{error}</p>}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm -space-y-px">
@@ -73,12 +90,13 @@ const LoginForm = () => {
             </div>
 
             <div className="text-sm">
-              <a
-                href="#"
+              <button
+                type="button"
                 className="font-medium text-purple-600 hover:text-purple-500"
+                onClick={() => {}}
               >
                 Glömt lösenord?
-              </a>
+              </button>
             </div>
           </div>
 
