@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import AuthService from "/api/authService";
+import { useAuth } from "../AuthContext.jsx";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -21,12 +22,12 @@ const LoginForm = () => {
         }
       );
       localStorage.setItem("token", response.data.token);
-      navigate("/"); // Homepage
+      login({ username: username });
+      navigate("/");
     } catch (error) {
       setError(error.response?.data?.message || "Inloggningen misslyckades");
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">

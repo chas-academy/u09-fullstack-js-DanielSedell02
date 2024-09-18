@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { UserCircle, Plus, List, Menu, X, Info } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserCircle, Plus, List, Menu, X, Info, LogOut } from "lucide-react";
+import { useAuth } from "../AuthContext"; // Make sure to create this file
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/Logga-in");
+  };
 
   return (
     <nav className="bg-white border-b border-gray-200 p-4">
@@ -36,11 +44,28 @@ const Navbar = () => {
               text="annonser"
             />
             <NavButton to="/about" icon={<Info size={16} />} text="About" />
-            <NavButton
-              to="/Logga-in"
-              icon={<UserCircle size={16} />}
-              text="Logga in"
-            />
+            {user ? (
+              <>
+                <span className="text-gray-700 mr-4">
+                  Välkommen, {user.username}!
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-purple-600 hover:shadow-lg
+                             px-4 py-2 rounded-full flex items-center text-sm transition-all duration-300
+                             hover:scale-105"
+                >
+                  <LogOut size={16} className="mr-2" />
+                  Logga ut
+                </button>
+              </>
+            ) : (
+              <NavButton
+                to="/Logga-in"
+                icon={<UserCircle size={16} />}
+                text="Logga in"
+              />
+            )}
           </div>
         </div>
 
@@ -54,9 +79,9 @@ const Navbar = () => {
               mobile
             />
             <NavButton
-              to="/view-ads"
+              to="/annonser"
               icon={<List size={16} />}
-              text="View Ads"
+              text="annonser"
               mobile
             />
             <NavButton
@@ -65,12 +90,29 @@ const Navbar = () => {
               text="About"
               mobile
             />
-            <NavButton
-              to="/Logga-in"
-              icon={<UserCircle size={16} />}
-              text="Logga in"
-              mobile
-            />
+            {user ? (
+              <>
+                <span className="text-gray-700 block mb-2">
+                  Välkommen, {user.username}!
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-purple-600 hover:shadow-lg
+                             px-4 py-2 rounded-full flex items-center text-sm transition-all duration-300
+                             hover:scale-105 w-full justify-center"
+                >
+                  <LogOut size={16} className="mr-2" />
+                  Logga ut
+                </button>
+              </>
+            ) : (
+              <NavButton
+                to="/Logga-in"
+                icon={<UserCircle size={16} />}
+                text="Logga in"
+                mobile
+              />
+            )}
           </div>
         )}
       </div>
