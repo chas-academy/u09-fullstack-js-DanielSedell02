@@ -1,12 +1,12 @@
 import React from "react";
+import AddAdForm from "../components/AddAdForm";
 
-const AddAd = () => {
+const LoginPage = () => {
   return (
-    <div className="container mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4">+ annons</h1>
-      <p>Här kan du lägga in en annons</p>
+    <div>
+      <AddAdForm />
     </div>
   );
 };
 
-export default AddAd;
+export default LoginPage;
