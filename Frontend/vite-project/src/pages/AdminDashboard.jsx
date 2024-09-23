@@ -2,9 +2,9 @@ import React from "react";
 
 const AdminDashboard = () => {
   return (
-    <div className="container mx-auto mt-8">
+    <div>
       <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-      <p>Admin page</p>
+      <p>Welcome to the admin dashboard. Use the sidebar to navigate.</p>
     </div>
   );
 };

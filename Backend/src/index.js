@@ -6,6 +6,7 @@ const cors = require("cors");
 const connectDB = require("./db/db");
 const authRoutes = require("./routes/authRoutes");
 const adRoutes = require("./routes/adRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/ads", adRoutes);
+app.use("/api/admin", adminRoutes);
 
 const PORT = process.env.PORT || 3000;
 

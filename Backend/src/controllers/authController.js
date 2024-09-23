@@ -21,6 +21,7 @@ exports.register = async (req, res) => {
       username,
       email,
       password: hashedPassword,
+      role: "user",
     });
 
     await user.save();
@@ -52,6 +53,7 @@ exports.login = async (req, res) => {
     const payload = {
       user: {
         id: user.id,
+        role: user.role,
       },
     };
 
@@ -61,7 +63,15 @@ exports.login = async (req, res) => {
       { expiresIn: "1h" },
       (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({
+          token,
+          user: {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            role: user.role,
+          },
+        });
       }
     );
   } catch (error) {

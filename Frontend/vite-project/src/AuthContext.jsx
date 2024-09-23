@@ -12,11 +12,10 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = (userData) => {
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+  const login = async (userData) => {
+    localStorage.setItem("token", userData.token);
+    setUser(userData.user);
   };
-
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");

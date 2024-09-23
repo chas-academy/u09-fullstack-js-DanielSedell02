@@ -22,8 +22,13 @@ const LoginForm = () => {
         }
       );
       localStorage.setItem("token", response.data.token);
-      login({ username: username });
-      navigate("/");
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      // Redirect based on user role
+      if (response.data.user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       setError(error.response?.data?.message || "Inloggningen misslyckades");
     }

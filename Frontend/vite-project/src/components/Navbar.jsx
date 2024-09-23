@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserCircle, Plus, List, Menu, X, Info, LogOut } from "lucide-react";
-import { useAuth } from "../AuthContext"; // Make sure to create this file
+import {
+  UserCircle,
+  Plus,
+  List,
+  Menu,
+  X,
+  Info,
+  LogOut,
+  Settings,
+} from "lucide-react";
+import { useAuth } from "../AuthContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,6 +58,13 @@ const Navbar = () => {
                 <span className="text-gray-700 mr-4">
                   Välkommen, {user.username}!
                 </span>
+                {user.role === "admin" && (
+                  <NavButton
+                    to="/admin"
+                    icon={<Settings size={16} />}
+                    text="Admin"
+                  />
+                )}
                 <button
                   onClick={handleLogout}
                   className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-purple-600 hover:shadow-lg
@@ -95,6 +111,14 @@ const Navbar = () => {
                 <span className="text-gray-700 block mb-2">
                   Välkommen, {user.username}!
                 </span>
+                {user.role === "admin" && (
+                  <NavButton
+                    to="/admin"
+                    icon={<Settings size={16} />}
+                    text="Admin"
+                    mobile
+                  />
+                )}
                 <button
                   onClick={handleLogout}
                   className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-purple-600 hover:shadow-lg
