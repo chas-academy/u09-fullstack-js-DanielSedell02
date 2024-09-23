@@ -19,11 +19,33 @@ const upload = multer({ storage: storage });
 
 // Add a pre-processing middleware to log incoming requests
 router.use((req, res, next) => {
-  console.log("Incoming request body:", req.body);
-  console.log("Incoming request files:", req.files);
+  console.log(`Incoming ${req.method} request to ${req.path}`);
+  if (req.method === "POST") {
+    console.log("Request body:", req.body);
+    console.log("Request files:", req.files);
+  }
   next();
 });
 
+// GET all ads
+router.get("/", async (req, res) => {
+  try {
+    console.log("Fetching all ads");
+    const ads = await Ad.find()
+      .sort({ createdAt: -1 })
+      .populate("userId", "username");
+    // Sort by newest first
+    console.log(`Found ${ads.length} ads`);
+    res.json(ads);
+  } catch (error) {
+    console.error("Error fetching ads:", error);
+    res
+      .status(500)
+      .json({ message: "Error fetching ads", error: error.message });
+  }
+});
+
+// POST new ad
 router.post(
   "/",
   authMiddleware,

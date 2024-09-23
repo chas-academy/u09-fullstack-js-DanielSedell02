@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminDashboard from "./pages/AdminDashboard";
 import About from "./pages/About";
+import AdsList from "./components/AdsList";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/add-ad" element={<AddAd />} />
-              <Route path="/Annonser" element={<ViewAds />} />
+              <Route path="/annonser" element={<AdsList />} />
               <Route path="/Logga-in" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/admin" element={<AdminDashboard />} />
