@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../AuthContext.jsx";
 
 const LoginForm = () => {
@@ -14,25 +13,18 @@ const LoginForm = () => {
     e.preventDefault();
     setError("");
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
-        {
-          username,
-          password,
-        }
-      );
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+      const user = await login(username, password);
       // Redirect based on user role
-      if (response.data.user.role === "admin") {
+      if (user.role === "admin") {
         navigate("/admin");
       } else {
         navigate("/");
       }
     } catch (error) {
-      setError(error.response?.data?.message || "Inloggningen misslyckades");
+      setError(error.message || "Inloggningen misslyckades");
     }
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
