@@ -22,12 +22,12 @@ const AdminLayout = () => {
           </li>
           <li>
             <Link to="/admin/users" className="block py-2">
-              Manage Users
+              Hantera användare
             </Link>
           </li>
           <li>
             <Link to="/admin/users/create" className="block py-2">
-              Create User
+              Skapa användare
             </Link>
           </li>
         </ul>

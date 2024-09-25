@@ -57,13 +57,13 @@ const AdminUserList = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Manage Users</h1>
+      <h1 className="text-2xl font-bold mb-4">Hantera användare</h1>
       <table className="w-full">
         <thead>
           <tr>
-            <th>Username</th>
+            <th>Användarnamn</th>
             <th>Email</th>
-            <th>Actions</th>
+            <th>åtgärder</th>
           </tr>
         </thead>
         <tbody>
@@ -76,13 +76,13 @@ const AdminUserList = () => {
                   to={`/admin/users/edit/${user._id}`}
                   className="text-blue-500 mr-2"
                 >
-                  Edit
+                  Uppdatera
                 </Link>
                 <button
                   onClick={() => deleteUser(user._id)}
                   className="text-red-500"
                 >
-                  Delete
+                  Radera
                 </button>
               </td>
             </tr>

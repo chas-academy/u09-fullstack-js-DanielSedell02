@@ -21,10 +21,13 @@ import AdminUserCreate from "./pages/AdminUserCreate";
 import AdminUserEdit from "./pages/AdminUserEdit";
 
 // Protected Route component
-const ProtectedAdminRoute = ({ children }) => {
+const ProtectedAdminRoute = ({ children, adminOnly = false }) => {
   const { user } = useAuth();
-  if (!user || user.role !== "admin") {
-    return <Navigate to="/Logga-in" replace />;
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+  if (adminOnly && user.role !== "admin") {
+    return <Navigate to="/" replace />;
   }
   return children;
 };

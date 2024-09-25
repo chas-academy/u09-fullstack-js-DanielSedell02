@@ -61,10 +61,10 @@ const AdminUserEdit = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Edit User</h1>
+      <h1 className="text-2xl font-bold mb-4">Uppdatera användare</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block">Username</label>
+          <label className="block">Användarnamn</label>
           <input
             type="text"
             value={username}
@@ -87,7 +87,7 @@ const AdminUserEdit = () => {
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded"
         >
-          Update User
+          Uppdatera användare
         </button>
       </form>
     </div>

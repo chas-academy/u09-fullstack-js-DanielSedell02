@@ -47,7 +47,7 @@ const AdminUserCreate = () => {
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block">Username</label>
+          <label className="block">Användarnamn</label>
           <input
             type="text"
             value={username}
@@ -67,7 +67,7 @@ const AdminUserCreate = () => {
           />
         </div>
         <div>
-          <label className="block">Password</label>
+          <label className="block">Lösenord</label>
           <input
             type="password"
             value={password}
