@@ -7,6 +7,7 @@ const connectDB = require("./db/db");
 const authRoutes = require("./routes/authRoutes");
 const adRoutes = require("./routes/adRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const searchRoutes = require("./routes/searchRoutes");
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/auth", authRoutes);
 app.use("/api/ads", adRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api", searchRoutes);
 
 const PORT = process.env.PORT || 3000;
 

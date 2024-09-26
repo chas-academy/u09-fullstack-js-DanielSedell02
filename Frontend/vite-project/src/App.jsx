@@ -19,6 +19,7 @@ import AdminLayout from "./components/AdminLayout";
 import AdminUserList from "./pages/AdminUserList";
 import AdminUserCreate from "./pages/AdminUserCreate";
 import AdminUserEdit from "./pages/AdminUserEdit";
+import SingleAdPage from "./components/SingleAdPage";
 
 // Protected Route component
 const ProtectedAdminRoute = ({ children, adminOnly = false }) => {
@@ -45,6 +46,7 @@ function AppRoutes() {
             <Route path="/Logga-in" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/about" element={<About />} />
+            <Route path="/ad/:id" element={<SingleAdPage />} />
             <Route
               path="/admin"
               element={

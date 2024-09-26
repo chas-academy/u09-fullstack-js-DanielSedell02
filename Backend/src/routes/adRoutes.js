@@ -80,4 +80,18 @@ router.post(
   }
 );
 
+// Route to get a single ad by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const ad = await Ad.findById(req.params.id);
+    if (!ad) {
+      return res.status(404).json({ message: "Ad not found" });
+    }
+    res.json(ad);
+  } catch (error) {
+    console.error("Error fetching ad:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
 module.exports = router;
