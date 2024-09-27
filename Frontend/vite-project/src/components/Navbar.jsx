@@ -23,11 +23,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white border-b border-gray-200 p-4">
+    <nav className="bg-white border-b border-gray-200 p-4 shadow-sm">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center group">
-            <div className="bg-gray-100 p-2 rounded-full mr-2 transition-all duration-300 group-hover:bg-gray-200 group-hover:shadow-lg group-hover:scale-110">
+            <div className="bg-gray-50 p-2 rounded-full mr-2 transition-all duration-300 group-hover:bg-gray-100 group-hover:shadow-md">
               <img
                 src="/logo.png"
                 alt="ScentSaving Logo"
@@ -55,7 +55,7 @@ const Navbar = () => {
             <NavButton to="/about" icon={<Info size={16} />} text="About" />
             {user ? (
               <>
-                <span className="text-gray-700 mr-4">
+                <span className="text-gray-700 mr-4 font-medium">
                   Välkommen, {user.username}!
                 </span>
                 {user.role === "admin" && (
@@ -67,9 +67,8 @@ const Navbar = () => {
                 )}
                 <button
                   onClick={handleLogout}
-                  className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-purple-600 hover:shadow-lg
-                             px-4 py-2 rounded-full flex items-center text-sm transition-all duration-300
-                             hover:scale-105"
+                  className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 hover:shadow-md
+                             px-4 py-2 rounded-full flex items-center text-sm transition-all duration-300"
                 >
                   <LogOut size={16} className="mr-2" />
                   Logga ut
@@ -87,7 +86,7 @@ const Navbar = () => {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 space-y-2">
+          <div className="md:hidden mt-4 space-y-2 bg-gray-50 p-4 rounded-lg">
             <NavButton
               to="/add-ad"
               icon={<Plus size={16} />}
@@ -108,7 +107,7 @@ const Navbar = () => {
             />
             {user ? (
               <>
-                <span className="text-gray-700 block mb-2">
+                <span className="text-gray-700 block mb-2 font-medium">
                   Välkommen, {user.username}!
                 </span>
                 {user.role === "admin" && (
@@ -121,9 +120,9 @@ const Navbar = () => {
                 )}
                 <button
                   onClick={handleLogout}
-                  className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-purple-600 hover:shadow-lg
+                  className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 hover:shadow-md
                              px-4 py-2 rounded-full flex items-center text-sm transition-all duration-300
-                             hover:scale-105 w-full justify-center"
+                             w-full justify-center"
                 >
                   <LogOut size={16} className="mr-2" />
                   Logga ut
@@ -147,9 +146,9 @@ const Navbar = () => {
 const NavButton = ({ to, icon, text, mobile = false }) => (
   <Link
     to={to}
-    className={`bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-purple-600 hover:shadow-lg
+    className={`bg-gray-50 text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:shadow-md
                 px-4 py-2 rounded-full flex items-center text-sm transition-all duration-300
-                hover:scale-105 ${mobile ? "w-full justify-center" : ""}`}
+                ${mobile ? "w-full justify-center" : ""}`}
   >
     {icon && (
       <span className="mr-2 transition-transform duration-300 group-hover:scale-110">

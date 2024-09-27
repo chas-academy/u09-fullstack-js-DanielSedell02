@@ -1,7 +1,8 @@
 import React from "react";
 import LetterPullupComponent from "../components/letter-pullup";
 import { BoxReveal } from "../components/box-reveal";
-
+import perfumeAboutImage from "../images/perfumeAbout.jpg";
+import grundareImage from "../images/grundare.jpg";
 const About = () => {
   return (
     <div className="container mx-auto px-4 py-8">
@@ -12,7 +13,7 @@ const About = () => {
       <div className="max-w-3xl mx-auto">
         <div className="mb-8">
           <img
-            src="/about-hero-image.jpg"
+            src={perfumeAboutImage}
             alt="Diverse collection of perfume bottles"
             className="w-full h-64 object-cover rounded-lg shadow-md mb-4"
           />
@@ -46,7 +47,7 @@ const About = () => {
         <div className="mb-8">
           <BoxReveal>
             <img
-              src="/founder-image.jpg"
+              src={grundareImage}
               alt="Grundaren av ScentSaving"
               className="w-1/2 float-right ml-4 mb-4 rounded-lg shadow-md"
             />
