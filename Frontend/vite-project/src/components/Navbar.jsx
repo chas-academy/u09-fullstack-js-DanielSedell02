@@ -9,12 +9,16 @@ import {
   Info,
   LogOut,
   Settings,
+  Moon,
+  Sun,
 } from "lucide-react";
 import { useAuth } from "../AuthContext";
+import { useDarkMode } from "../DarkModeContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useAuth();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -23,11 +27,23 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white border-b border-gray-200 p-4 shadow-sm">
+    <nav
+      className={`${isDarkMode ? "bg-gray-800" : "bg-white"} border-b ${
+        isDarkMode ? "border-gray-700" : "border-gray-200"
+      } p-4 shadow-sm`}
+    >
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center group">
-            <div className="bg-gray-50 p-2 rounded-full mr-2 transition-all duration-300 group-hover:bg-gray-100 group-hover:shadow-md">
+            <div
+              className={`${
+                isDarkMode ? "bg-gray-700" : "bg-gray-50"
+              } p-2 rounded-full mr-2 transition-all duration-300 ${
+                isDarkMode
+                  ? "group-hover:bg-gray-600"
+                  : "group-hover:bg-gray-100"
+              } group-hover:shadow-md`}
+            >
               <img
                 src="/logo.png"
                 alt="ScentSaving Logo"
@@ -39,7 +55,11 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-gray-600 hover:text-gray-800 transition-colors duration-300"
+            className={`md:hidden ${
+              isDarkMode ? "text-gray-200" : "text-gray-600"
+            } ${
+              isDarkMode ? "hover:text-gray-100" : "hover:text-gray-800"
+            } transition-colors duration-300`}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -55,7 +75,11 @@ const Navbar = () => {
             <NavButton to="/about" icon={<Info size={16} />} text="About" />
             {user ? (
               <>
-                <span className="text-gray-700 mr-4 font-medium">
+                <span
+                  className={`${
+                    isDarkMode ? "text-gray-300" : "text-gray-700"
+                  } mr-4 font-medium`}
+                >
                   Välkommen, {user.username}!
                 </span>
                 {user.role === "admin" && (
@@ -67,8 +91,16 @@ const Navbar = () => {
                 )}
                 <button
                   onClick={handleLogout}
-                  className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 hover:shadow-md
-                             px-4 py-2 rounded-full flex items-center text-sm transition-all duration-300"
+                  className={`${
+                    isDarkMode
+                      ? "bg-gray-700 text-gray-200"
+                      : "bg-gray-100 text-gray-700"
+                  } ${
+                    isDarkMode
+                      ? "hover:bg-gray-600 hover:text-white"
+                      : "hover:bg-gray-200 hover:text-gray-900"
+                  } hover:shadow-md
+                             px-4 py-2 rounded-full flex items-center text-sm transition-all duration-300`}
                 >
                   <LogOut size={16} className="mr-2" />
                   Logga ut
@@ -81,12 +113,29 @@ const Navbar = () => {
                 text="Logga in"
               />
             )}
+            <button
+              onClick={toggleDarkMode}
+              className={`${
+                isDarkMode
+                  ? "bg-gray-700 text-yellow-300"
+                  : "bg-gray-100 text-gray-700"
+              } ${
+                isDarkMode ? "hover:bg-gray-600" : "hover:bg-gray-200"
+              } hover:shadow-md
+                         p-2 rounded-full transition-all duration-300`}
+            >
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
           </div>
         </div>
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 space-y-2 bg-gray-50 p-4 rounded-lg">
+          <div
+            className={`md:hidden mt-4 space-y-2 ${
+              isDarkMode ? "bg-gray-700" : "bg-gray-50"
+            } p-4 rounded-lg`}
+          >
             <NavButton
               to="/add-ad"
               icon={<Plus size={16} />}
@@ -107,7 +156,11 @@ const Navbar = () => {
             />
             {user ? (
               <>
-                <span className="text-gray-700 block mb-2 font-medium">
+                <span
+                  className={`${
+                    isDarkMode ? "text-gray-300" : "text-gray-700"
+                  } block mb-2 font-medium`}
+                >
                   Välkommen, {user.username}!
                 </span>
                 {user.role === "admin" && (
@@ -120,9 +173,17 @@ const Navbar = () => {
                 )}
                 <button
                   onClick={handleLogout}
-                  className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 hover:shadow-md
+                  className={`${
+                    isDarkMode
+                      ? "bg-gray-600 text-gray-200"
+                      : "bg-gray-100 text-gray-700"
+                  } ${
+                    isDarkMode
+                      ? "hover:bg-gray-500 hover:text-white"
+                      : "hover:bg-gray-200 hover:text-gray-900"
+                  } hover:shadow-md
                              px-4 py-2 rounded-full flex items-center text-sm transition-all duration-300
-                             w-full justify-center"
+                             w-full justify-center`}
                 >
                   <LogOut size={16} className="mr-2" />
                   Logga ut
@@ -136,6 +197,22 @@ const Navbar = () => {
                 mobile
               />
             )}
+            <button
+              onClick={toggleDarkMode}
+              className={`${
+                isDarkMode
+                  ? "bg-gray-600 text-yellow-300"
+                  : "bg-gray-200 text-gray-700"
+              } ${
+                isDarkMode ? "hover:bg-gray-500" : "hover:bg-gray-300"
+              } hover:shadow-md
+                         p-2 rounded-full transition-all duration-300 w-full flex justify-center items-center`}
+            >
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+              <span className="ml-2">
+                {isDarkMode ? "Light Mode" : "Dark Mode"}
+              </span>
+            </button>
           </div>
         )}
       </div>
@@ -143,20 +220,29 @@ const Navbar = () => {
   );
 };
 
-const NavButton = ({ to, icon, text, mobile = false }) => (
-  <Link
-    to={to}
-    className={`bg-gray-50 text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:shadow-md
-                px-4 py-2 rounded-full flex items-center text-sm transition-all duration-300
-                ${mobile ? "w-full justify-center" : ""}`}
-  >
-    {icon && (
-      <span className="mr-2 transition-transform duration-300 group-hover:scale-110">
-        {icon}
-      </span>
-    )}
-    {text}
-  </Link>
-);
+const NavButton = ({ to, icon, text, mobile = false }) => {
+  const { isDarkMode } = useDarkMode();
+  return (
+    <Link
+      to={to}
+      className={`${
+        isDarkMode ? "bg-gray-700 text-gray-200" : "bg-gray-50 text-gray-700"
+      } ${
+        isDarkMode
+          ? "hover:bg-gray-600 hover:text-white"
+          : "hover:bg-gray-100 hover:text-gray-900"
+      } hover:shadow-md
+                  px-4 py-2 rounded-full flex items-center text-sm transition-all duration-300
+                  ${mobile ? "w-full justify-center" : ""}`}
+    >
+      {icon && (
+        <span className="mr-2 transition-transform duration-300 group-hover:scale-110">
+          {icon}
+        </span>
+      )}
+      {text}
+    </Link>
+  );
+};
 
 export default Navbar;

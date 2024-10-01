@@ -48,9 +48,7 @@ const AdsList = () => {
                     alt={ad.fragranceName}
                   />
                 )}
-                <p className="text-gray-600 mb-2 line-clamp-2">
-                  {ad.description}
-                </p>
+
                 <p className="font-bold">Price: {ad.price} SEK</p>
                 <p className="text-sm text-gray-500">Quality: {ad.quality}</p>
                 {ad.userId && ad.userId.username && (

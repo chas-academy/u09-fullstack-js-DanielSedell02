@@ -61,11 +61,8 @@ const SingleAdPage = () => {
               <span className="font-medium text-gray-800">{ad.quality}</span>
             </p>
             {ad.userId && ad.userId.username && (
-              <p className="text-gray-600">
-                Posted by:{" "}
-                <span className="font-medium text-gray-800">
-                  {ad.userId.username}
-                </span>
+              <p className="text-sm text-gray-500 mt-2">
+                Posted by: {ad.userId.username}
               </p>
             )}
           </div>

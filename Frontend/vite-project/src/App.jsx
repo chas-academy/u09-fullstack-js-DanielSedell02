@@ -6,6 +6,8 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthProvider, useAuth } from "./AuthContext";
+import { DarkModeProvider, useDarkMode } from "./DarkModeContext";
+
 // Import components
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -34,9 +36,15 @@ const ProtectedAdminRoute = ({ children, adminOnly = false }) => {
 };
 
 function AppRoutes() {
+  const { isDarkMode } = useDarkMode();
+
   return (
     <Router>
-      <div className="App flex flex-col min-h-screen">
+      <div
+        className={`App flex flex-col min-h-screen ${
+          isDarkMode ? "dark bg-gray-900 text-white" : "bg-white text-black"
+        }`}
+      >
         <Navbar />
         <main className="flex-grow">
           <Routes>
@@ -62,7 +70,13 @@ function AppRoutes() {
             </Route>
           </Routes>
         </main>
-        <footer className="bg-gray-100 text-center py-4 mt-8">
+        <footer
+          className={`${
+            isDarkMode
+              ? "bg-gray-800 text-gray-200"
+              : "bg-gray-100 text-gray-800"
+          } text-center py-4 mt-8`}
+        >
           <p>&copy; 2024 ScentSaving. All rights reserved.</p>
         </footer>
       </div>
@@ -73,7 +87,9 @@ function AppRoutes() {
 function App() {
   return (
     <AuthProvider>
-      <AppRoutes />
+      <DarkModeProvider>
+        <AppRoutes />
+      </DarkModeProvider>
     </AuthProvider>
   );
 }
