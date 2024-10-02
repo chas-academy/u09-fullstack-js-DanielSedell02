@@ -26,11 +26,15 @@ const SingleAdPage = () => {
   }, [id]);
 
   if (loading)
-    return <div className="text-center mt-8 text-gray-600">Loading...</div>;
+    return <div className="text-center mt-8 text-gray-600">Laddar...</div>;
   if (error)
     return <div className="text-center mt-8 text-red-500">{error}</div>;
   if (!ad)
-    return <div className="text-center mt-8 text-gray-600">Ad not found</div>;
+    return (
+      <div className="text-center mt-8 text-gray-600">
+        Inga annonser hittades
+      </div>
+    );
 
   return (
     <div className="container mx-auto px-4 py-8 bg-gray-50">
@@ -46,23 +50,23 @@ const SingleAdPage = () => {
           )}
           <div className="mb-6">
             <p className="text-2xl font-semibold text-gray-700">
-              Price: <span className="text-gray-900">{ad.price} SEK</span>
+              Pris: <span className="text-gray-900">{ad.price} SEK</span>
             </p>
           </div>
           <div className="mb-6">
             <h2 className="text-xl font-semibold mb-2 text-gray-800">
-              Description
+              Beskrivning
             </h2>
             <p className="text-gray-600 leading-relaxed">{ad.description}</p>
           </div>
           <div className="flex items-center justify-between mb-6">
             <p className="text-gray-600">
-              Quality:{" "}
+              Mängd kvar:{" "}
               <span className="font-medium text-gray-800">{ad.quality}</span>
             </p>
             {ad.userId && ad.userId.username && (
               <p className="text-sm text-gray-500 mt-2">
-                Posted by: {ad.userId.username}
+                Publicerad av: {ad.userId.username}
               </p>
             )}
           </div>
@@ -72,7 +76,7 @@ const SingleAdPage = () => {
               className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-6 py-2 rounded-full 
                          transition-all duration-300 inline-block hover:shadow-md"
             >
-              Back to Listings
+              Tillbaka till annonserna
             </Link>
           </div>
         </div>

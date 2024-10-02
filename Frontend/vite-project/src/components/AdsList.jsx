@@ -26,14 +26,14 @@ const AdsList = () => {
     fetchAds();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div>Laddar...</div>;
   if (error) return <div>{error}</div>;
 
   return (
     <div className="container mx-auto px-4">
-      <h1 className="text-2xl font-bold mb-4">All Fragrance Ads</h1>
+      <h1 className="text-2xl font-bold mb-4">Alla parfym annonser</h1>
       {ads.length === 0 ? (
-        <p>No ads found.</p>
+        <p>Inga annonser hittades</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {ads.map((ad) => (
@@ -49,11 +49,13 @@ const AdsList = () => {
                   />
                 )}
 
-                <p className="font-bold">Price: {ad.price} SEK</p>
-                <p className="text-sm text-gray-500">Quality: {ad.quality}</p>
+                <p className="font-bold">Pris: {ad.price} SEK</p>
+                <p className="text-sm text-gray-500">
+                  Mängd kvar: {ad.quality}
+                </p>
                 {ad.userId && ad.userId.username && (
                   <p className="text-sm text-gray-500 mt-2">
-                    Posted by: {ad.userId.username}
+                    Publicerad av: {ad.userId.username}
                   </p>
                 )}
               </div>

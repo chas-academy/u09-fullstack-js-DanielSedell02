@@ -68,17 +68,17 @@ const AddAdForm = () => {
   };
 
   if (!user) {
-    return <p>Please log in to post an ad.</p>;
+    return <p>Du måste vara inloggad för att posta en annons!</p>;
   }
 
   return (
     <div className="max-w-md mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4">Post a New Fragrance Ad</h2>
+      <h2 className="text-2xl font-bold mb-4">Publicera en ny annons</h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="fragranceName" className="block mb-1">
-            Fragrance Name
+            Parfymens namn
           </label>
           <input
             type="text"
@@ -91,7 +91,7 @@ const AddAdForm = () => {
         </div>
         <div>
           <label htmlFor="price" className="block mb-1">
-            Price (SEK)
+            Pris (SEK)
           </label>
           <input
             type="number"
@@ -106,7 +106,7 @@ const AddAdForm = () => {
         </div>
         <div>
           <label htmlFor="images" className="block mb-1">
-            Images (Max 3)
+            Bilder (Max 3)
           </label>
           <input
             type="file"
@@ -137,7 +137,7 @@ const AddAdForm = () => {
         </div>
         <div>
           <label htmlFor="description" className="block mb-1">
-            Description
+            Beskrivning
           </label>
           <textarea
             id="description"
@@ -149,7 +149,7 @@ const AddAdForm = () => {
         </div>
         <div>
           <label htmlFor="quality" className="block mb-1">
-            Quality
+            Mängd kvar
           </label>
           <select
             id="quality"
@@ -158,20 +158,20 @@ const AddAdForm = () => {
             required
             className="w-full px-3 py-2 border rounded-md"
           >
-            <option value="">Select quality</option>
-            <option value="new">New (100%)</option>
-            <option value="likeNew">Like New (90-99%)</option>
-            <option value="veryGood">Very Good (80-89%)</option>
-            <option value="good">Good (70-79%)</option>
-            <option value="fair">Fair (60-69%)</option>
-            <option value="poor">Poor (Below 60%)</option>
+            <option value="">Välj mängd</option>
+            <option value="new">(100%)</option>
+            <option value="likeNew">(90-99%)</option>
+            <option value="veryGood">(80-89%)</option>
+            <option value="good">(70-79%)</option>
+            <option value="fair">(60-69%)</option>
+            <option value="poor">(60%)</option>
           </select>
         </div>
         <button
           type="submit"
           className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700"
         >
-          Post Ad
+          Posta annons
         </button>
       </form>
     </div>

@@ -66,13 +66,17 @@ const Navbar = () => {
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-4">
-            <NavButton to="/add-ad" icon={<Plus size={16} />} text="Add Ad" />
+            <NavButton
+              to="/add-ad"
+              icon={<Plus size={16} />}
+              text="Posta en annons"
+            />
             <NavButton
               to="/annonser"
               icon={<List size={16} />}
               text="annonser"
             />
-            <NavButton to="/about" icon={<Info size={16} />} text="About" />
+            <NavButton to="/about" icon={<Info size={16} />} text="Om oss" />
             {user ? (
               <>
                 <span
@@ -139,7 +143,7 @@ const Navbar = () => {
             <NavButton
               to="/add-ad"
               icon={<Plus size={16} />}
-              text="Add Ad"
+              text="Posta en annons"
               mobile
             />
             <NavButton
@@ -151,7 +155,7 @@ const Navbar = () => {
             <NavButton
               to="/about"
               icon={<Info size={16} />}
-              text="About"
+              text="Om oss"
               mobile
             />
             {user ? (

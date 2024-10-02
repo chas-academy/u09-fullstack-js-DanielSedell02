@@ -1,29 +1,45 @@
-import React from "react";
-import LetterPullupComponent from "../components/letter-pullup";
+import React, { lazy, Suspense, memo } from "react";
 import { BoxReveal } from "../components/box-reveal";
-import perfumeAboutImage from "../images/perfumeAbout.jpg";
-import grundareImage from "../images/grundare.jpg";
+import perfumeAboutImage from "../images/perfumeAbout.webp";
+import grundareImage from "../images/grundare.webp";
+
+const LetterPullupComponent = lazy(() => import("../components/letter-pullup"));
+
+// eslint-disable-next-line react/display-name
+const OptimizedImage = memo(
+  ({ src, webpSrc, alt, className, loading = "lazy" }) => (
+    <picture>
+      <source srcSet={webpSrc} type="image/webp" />
+      <source srcSet={src} type="image/jpeg" />
+      <img src={src} alt={alt} className={className} loading={loading} />
+    </picture>
+  )
+);
+
 const About = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-center">
-        <LetterPullupComponent words="Om ScentSaving" />
+        <Suspense fallback={<div>Laddar...</div>}>
+          <LetterPullupComponent words="Om ScentSaving" />
+        </Suspense>
       </h1>
 
       <div className="max-w-3xl mx-auto">
-        <div className="mb-8">
-          <img
+        <section className="mb-8">
+          <OptimizedImage
             src={perfumeAboutImage}
             alt="Diverse collection of perfume bottles"
             className="w-full h-64 object-cover rounded-lg shadow-md mb-4"
+            loading="eager"
           />
           <p className="text-lg mb-4">
             Välkommen till ScentSaving - din destination för exklusiva dofter
             till överkomliga priser!
           </p>
-        </div>
+        </section>
 
-        <div className="mb-8">
+        <section className="mb-8">
           <BoxReveal>
             <h2 className="text-2xl font-semibold mb-4">Vår Historia</h2>
             <p className="mb-4">
@@ -42,11 +58,11 @@ const About = () => {
               approach till skönhetsprodukter.
             </p>
           </BoxReveal>
-        </div>
+        </section>
 
-        <div className="mb-8">
+        <section className="mb-8">
           <BoxReveal>
-            <img
+            <OptimizedImage
               src={grundareImage}
               alt="Grundaren av ScentSaving"
               className="w-1/2 float-right ml-4 mb-4 rounded-lg shadow-md"
@@ -74,9 +90,9 @@ const About = () => {
               </li>
             </ul>
           </BoxReveal>
-        </div>
+        </section>
 
-        <div>
+        <section>
           <BoxReveal>
             <h2 className="text-2xl font-semibold mb-4">Vår Garanti</h2>
             <p className="mb-4">
@@ -92,10 +108,10 @@ const About = () => {
               medan du sparar pengar och bidrar till en mer hållbar framtid.
             </p>
           </BoxReveal>
-        </div>
+        </section>
       </div>
     </div>
   );
 };
 
-export default About;
+export default memo(About);
