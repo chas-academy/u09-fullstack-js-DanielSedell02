@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ImageSlideshow from "./ImageSlideshow";
+import { useAuth } from "../AuthContext";
+import { useCart } from "../CartContext";
 
 const SingleAdPage = () => {
   const [ad, setAd] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [addedToCart, setAddedToCart] = useState(false);
   const { id } = useParams();
+  const { user } = useAuth();
+  const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAd = async () => {
@@ -24,6 +30,26 @@ const SingleAdPage = () => {
 
     fetchAd();
   }, [id]);
+
+  const handleAddToCart = () => {
+    if (!user) {
+      navigate("/Logga-in", { state: { from: `/ad/${id}` } });
+      return;
+    }
+    try {
+      addToCart({
+        id: ad._id,
+        fragranceName: ad.fragranceName,
+        price: ad.price,
+        imageUrl: ad.imageUrls[0],
+      });
+      setAddedToCart(true);
+      setTimeout(() => setAddedToCart(false), 3000); // Reset after 3 seconds
+    } catch (error) {
+      console.error("Error adding item to cart:", error);
+      setError("Failed to add item to cart. Please try again.");
+    }
+  };
 
   if (loading)
     return <div className="text-center mt-8 text-gray-600">Laddar...</div>;
@@ -70,7 +96,7 @@ const SingleAdPage = () => {
               </p>
             )}
           </div>
-          <div className="mt-8">
+          <div className="mt-8 flex justify-between items-center">
             <Link
               to="/annonser"
               className="bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 px-6 py-2 rounded-full 
@@ -78,7 +104,21 @@ const SingleAdPage = () => {
             >
               Tillbaka till annonserna
             </Link>
+            <button
+              onClick={handleAddToCart}
+              className={`${
+                addedToCart ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"
+              } text-white px-6 py-2 rounded-full transition-all duration-300 inline-block hover:shadow-md`}
+              disabled={addedToCart}
+            >
+              {addedToCart ? "Tillagd i kundvagnen" : "Lägg till i kundvagnen"}
+            </button>
           </div>
+          {addedToCart && (
+            <p className="text-green-500 text-center mt-4">
+              Produkten har lagts till i din kundvagn!
+            </p>
+          )}
         </div>
       </div>
     </div>

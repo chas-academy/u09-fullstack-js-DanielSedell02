@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const adRoutes = require("./routes/adRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const searchRoutes = require("./routes/searchRoutes");
+const cartRoutes = require("./routes/cartRoutes");
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/ads", adRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api", searchRoutes);
+app.use("/api/cart", cartRoutes);
 
 const PORT = process.env.PORT || 3000;
 

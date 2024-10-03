@@ -22,6 +22,7 @@ import AdminUserList from "./pages/AdminUserList";
 import AdminUserCreate from "./pages/AdminUserCreate";
 import AdminUserEdit from "./pages/AdminUserEdit";
 import SingleAdPage from "./components/SingleAdPage";
+import { CartProvider } from "./CartContext";
 
 // Protected Route component
 const ProtectedAdminRoute = ({ children, adminOnly = false }) => {
@@ -88,7 +89,9 @@ function App() {
   return (
     <AuthProvider>
       <DarkModeProvider>
-        <AppRoutes />
+        <CartProvider>
+          <AppRoutes />
+        </CartProvider>
       </DarkModeProvider>
     </AuthProvider>
   );
