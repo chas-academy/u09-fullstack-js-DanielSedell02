@@ -23,6 +23,7 @@ import AdminUserCreate from "./pages/AdminUserCreate";
 import AdminUserEdit from "./pages/AdminUserEdit";
 import SingleAdPage from "./components/SingleAdPage";
 import { CartProvider } from "./CartContext";
+import CartCheckout from "./components/CartCheckout";
 
 // Protected Route component
 const ProtectedAdminRoute = ({ children, adminOnly = false }) => {
@@ -56,6 +57,7 @@ function AppRoutes() {
             <Route path="/register" element={<Register />} />
             <Route path="/about" element={<About />} />
             <Route path="/ad/:id" element={<SingleAdPage />} />
+            <Route path="/cart" element={<CartCheckout />} />
             <Route
               path="/admin"
               element={

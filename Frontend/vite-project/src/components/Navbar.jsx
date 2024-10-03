@@ -11,15 +11,20 @@ import {
   Settings,
   Moon,
   Sun,
+  ShoppingCart,
 } from "lucide-react";
 import { useAuth } from "../AuthContext";
 import { useDarkMode } from "../DarkModeContext";
+import { useCart } from "../CartContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useAuth();
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const { cart } = useCart();
   const navigate = useNavigate();
+
+  const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleLogout = () => {
     logout();
@@ -52,17 +57,27 @@ const Navbar = () => {
             </div>
           </Link>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`md:hidden ${
-              isDarkMode ? "text-gray-200" : "text-gray-600"
-            } ${
-              isDarkMode ? "hover:text-gray-100" : "hover:text-gray-800"
-            } transition-colors duration-300`}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile menu button and cart icon */}
+          <div className="flex items-center md:hidden">
+            <Link to="/cart" className="mr-4 relative">
+              <ShoppingCart
+                className={isDarkMode ? "text-white" : "text-gray-700"}
+              />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {cartItemCount}
+                </span>
+              )}
+            </Link>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className={`${isDarkMode ? "text-gray-200" : "text-gray-600"} ${
+                isDarkMode ? "hover:text-gray-100" : "hover:text-gray-800"
+              } transition-colors duration-300`}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-4">
@@ -130,6 +145,16 @@ const Navbar = () => {
             >
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
+            <Link to="/cart" className="relative">
+              <ShoppingCart
+                className={isDarkMode ? "text-white" : "text-gray-700"}
+              />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                  {cartItemCount}
+                </span>
+              )}
+            </Link>
           </div>
         </div>
 
