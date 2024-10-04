@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/auth/";
+const API_URL =
+  "https://u09-fullstack-js-danielsedell02-1.onrender.com/api/auth/";
 
 const register = (username, email, password) => {
   return axios.post(API_URL + "register", {
