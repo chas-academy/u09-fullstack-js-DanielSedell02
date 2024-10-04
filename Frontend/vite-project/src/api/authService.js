@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const API_URL =
-  "https://u09-fullstack-js-danielsedell02-1.onrender.com/api/auth/";
+  import.meta.env.VITE_API_URL ||
+  "https://u09-fullstack-js-danielsedell02-1.onrender.com";
 
 const register = (username, email, password) => {
   return axios.post(API_URL + "register", {
