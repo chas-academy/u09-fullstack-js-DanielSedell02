@@ -23,9 +23,6 @@ if (!fs.existsSync(uploadsDir)) {
 fs.chmodSync(uploadsDir, 0o775);
 console.log("Uploads directory permissions set");
 
-// CORS configuration
-const cors = require("cors");
-
 app.use(
   cors({
     origin: process.env.FRONTEND_URL || "https://scentsaving.netlify.app/",
