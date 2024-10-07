@@ -24,7 +24,9 @@ fs.chmodSync(uploadsDir, 0o775);
 console.log("Uploads directory permissions set");
 
 const corsOrigin = {
-  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  origin:
+    process.env.FRONTEND_URL ||
+    "https://66ffdc8dcdb31f1bd82c0c5f--scentsaving.netlify.app",
   credentials: true,
   optionSuccessStatus: 200,
 };
@@ -34,11 +36,6 @@ app.use(express.json());
 
 // Serve static files from the uploads directory
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-// Catch-all route
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -51,13 +48,8 @@ app.use("/api/cart", cartRoutes);
 connectDB();
 
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV}`);
-  console.log(
-    `Frontend URL: ${process.env.FRONTEND_URL || "http://localhost:5173"}`
-  );
+  console.log(`server is running on port ${PORT}`);
 });
 
 // Error handling middleware
