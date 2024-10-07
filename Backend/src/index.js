@@ -45,15 +45,15 @@ app.use("/api/cart", cartRoutes);
 // Connect to Database
 connectDB();
 
-// const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-//   console.log(`Environment: ${process.env.NODE_ENV}`);
-//   console.log(
-//     `Frontend URL: ${process.env.FRONTEND_URL || "http://localhost:5173"}`
-//   );
-// });
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV}`);
+  console.log(
+    `Frontend URL: ${process.env.FRONTEND_URL || "http://localhost:5173"}`
+  );
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
