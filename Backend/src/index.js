@@ -26,7 +26,8 @@ console.log("Uploads directory permissions set");
 const corsOptions = {
   origin: [
     process.env.FRONTEND_URL || "https://scentsaving.netlify.app/",
-    // Add any additional allowed origins here
+    process.env.RENDER_URL ||
+      "https://u09-fullstack-js-danielsedell02.onrender.com",
     "http://localhost:3000", // For local development
   ],
   credentials: true,
