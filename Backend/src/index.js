@@ -35,6 +35,11 @@ app.use(express.json());
 // Serve static files from the uploads directory
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+// Catch-all route
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/ads", adRoutes);
