@@ -23,14 +23,16 @@ if (!fs.existsSync(uploadsDir)) {
 fs.chmodSync(uploadsDir, 0o775);
 console.log("Uploads directory permissions set");
 
-const corsOrigin = {
-  origin:
-    process.env.FRONTEND_URL ||
-    "https://66ffdc8dcdb31f1bd82c0c5f--scentsaving.netlify.app",
+const corsOptions = {
+  origin: [
+    process.env.FRONTEND_URL || "https://scentsaving.netlify.app/",
+    // Add any additional allowed origins here
+    "http://localhost:3000", // For local development
+  ],
   credentials: true,
-  optionSuccessStatus: 200,
+  optionsSuccessStatus: 200,
 };
-app.use(cors(corsOrigin));
+app.use(cors(corsOptions));
 // Middleware
 app.use(express.json());
 
