@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
+import { API_URL } from "./config/api";
 
 const AuthContext = createContext(null);
 
@@ -15,10 +16,10 @@ export const AuthProvider = ({ children }) => {
   //Måste fråga om det här ska vara så
   const login = async (username, password) => {
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
-        { username, password }
-      );
+      const response = await axios.post(`${API_URL}/api/auth/login`, {
+        username,
+        password,
+      });
       const { token, user } = response.data;
 
       // Ensure that the user object includes the role

@@ -53,7 +53,7 @@ function AppRoutes() {
             <Route path="/" element={<Home />} />
             <Route path="/add-ad" element={<AddAd />} />
             <Route path="/annonser" element={<AdsList />} />
-            <Route path="/Logga-in" element={<Login />} />
+            <Route path="/logga-in" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/about" element={<About />} />
             <Route path="/ad/:id" element={<SingleAdPage />} />
