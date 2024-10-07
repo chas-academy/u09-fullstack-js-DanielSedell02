@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
       setUser(JSON.parse(storedUser));
     }
   }, []);
-
+  //Måste fråga om det här ska vara så
   const login = async (username, password) => {
     try {
       const response = await axios.post(

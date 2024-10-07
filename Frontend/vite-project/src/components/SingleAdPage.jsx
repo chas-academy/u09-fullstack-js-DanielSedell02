@@ -4,6 +4,7 @@ import axios from "axios";
 import ImageSlideshow from "./ImageSlideshow";
 import { useAuth } from "../AuthContext";
 import { useCart } from "../CartContext";
+import { API_URL } from "../config/api";
 
 const SingleAdPage = () => {
   const [ad, setAd] = useState(null);
@@ -18,7 +19,7 @@ const SingleAdPage = () => {
   useEffect(() => {
     const fetchAd = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/ads/${id}`);
+        const response = await axios.get(`${API_URL}/api/ads/${id}`);
         setAd(response.data);
       } catch (err) {
         console.error("Error fetching ad:", err);

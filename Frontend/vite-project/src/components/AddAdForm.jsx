@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../AuthContext";
+import { API_URL } from "../config/api";
 
 const AddAdForm = () => {
   const [fragranceName, setFragranceName] = useState("");
@@ -49,16 +50,14 @@ const AddAdForm = () => {
     });
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/ads",
-        formData,
+      const response = await axios.get(`${API_URL}/api/ads`);
+      formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        }
-      );
+        };
 
       console.log("Ad posted successfully:", response.data);
       navigate("/annonser"); // Redirect to the ads page after posting

@@ -1,6 +1,7 @@
 import React from "react";
 import { useCart } from "../CartContext";
 import { Link } from "react-router-dom";
+import { API_URL } from "../config/api";
 
 const CartCheckout = () => {
   const { cart, removeFromCart, updateQuantity } = useCart();
@@ -38,7 +39,7 @@ const CartCheckout = () => {
               >
                 <div className="w-20 h-20 mr-4 relative">
                   <img
-                    src={`http://localhost:3000${item.imageUrl}`}
+                    src={`${API_URL.item.imageUrl}`}
                     alt={item.fragranceName}
                     className="w-20 h-20 object-cover mr-4"
                     onError={(e) => handleImageError(e, item)}

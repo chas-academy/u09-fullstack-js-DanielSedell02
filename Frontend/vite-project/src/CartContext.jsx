@@ -1,5 +1,3 @@
-axios.defaults.baseURL = "http://localhost:3000";
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";

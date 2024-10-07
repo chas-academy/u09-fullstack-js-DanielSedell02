@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ImageSlideshow from "./ImageSlideshow";
+import { API_URL } from "../config/api";
 
 const AdsList = () => {
   const [ads, setAds] = useState([]);
@@ -12,7 +13,7 @@ const AdsList = () => {
     const fetchAds = async () => {
       try {
         console.log("Fetching ads from API");
-        const response = await axios.get("http://localhost:3000/api/ads");
+        const response = await axios.get(`${API_URL}/api/ads`);
         console.log("Received ads:", response.data);
         setAds(response.data);
         setLoading(false);
