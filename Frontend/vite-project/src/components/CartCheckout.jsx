@@ -39,7 +39,7 @@ const CartCheckout = () => {
               >
                 <div className="w-20 h-20 mr-4 relative">
                   <img
-                    src={`${API_URL.item.imageUrl}`}
+                    src={`${API_URL}${item.imageUrl}`}
                     alt={item.fragranceName}
                     className="w-20 h-20 object-cover mr-4"
                     onError={(e) => handleImageError(e, item)}
