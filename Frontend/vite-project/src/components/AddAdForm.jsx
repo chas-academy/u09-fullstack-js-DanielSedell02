@@ -8,7 +8,7 @@ const AddAdForm = () => {
   const [fragranceName, setFragranceName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [amountLeft, setAmountLeft] = useState("");
+  const [quality, setQuality] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const AddAdForm = () => {
     formData.append("fragranceName", fragranceName);
     formData.append("price", price);
     formData.append("description", description);
-    formData.append("amountLeft", amountLeft);
+    formData.append("quality", quality);
     images.forEach((image) => {
       formData.append("images", image);
     });
@@ -147,14 +147,14 @@ const AddAdForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="amountLeft" className="block mb-1">
+          <label htmlFor="quality" className="block mb-1">
             Mängd kvar (ml)
           </label>
           <input
             type="number"
-            id="amountLeft"
-            value={amountLeft}
-            onChange={(e) => setAmountLeft(e.target.value)}
+            id="quality"
+            value={quality}
+            onChange={(e) => setQuality(e.target.value)}
             required
             min="0"
             max="100"
