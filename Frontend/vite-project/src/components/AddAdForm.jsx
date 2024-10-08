@@ -8,7 +8,7 @@ const AddAdForm = () => {
   const [fragranceName, setFragranceName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [quality, setQuality] = useState("");
+  const [amountLeft, setAmountLeft] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ const AddAdForm = () => {
 
   const handleImageChange = (e) => {
     if (e.target.files.length + images.length > 3) {
-      alert("You can only upload a maximum of 3 images.");
+      alert("Du kan max ladda upp 3 bilder.");
       return;
     }
     setImages([...images, ...Array.from(e.target.files)]);
@@ -31,12 +31,12 @@ const AddAdForm = () => {
     setError("");
 
     if (!user) {
-      setError("You must be logged in to post an ad");
+      setError("Du måste vara inloggad för att posta en annons");
       return;
     }
 
     if (images.length === 0) {
-      setError("Please upload at least one image");
+      setError("Ladda upp minst en bild");
       return;
     }
 
@@ -44,25 +44,25 @@ const AddAdForm = () => {
     formData.append("fragranceName", fragranceName);
     formData.append("price", price);
     formData.append("description", description);
-    formData.append("quality", quality);
+    formData.append("amountLeft", amountLeft);
     images.forEach((image) => {
       formData.append("images", image);
     });
 
     try {
-      const response = await axios.get(`${API_URL}/api/ads`);
-      formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        };
+      const response = await axios.post(`${API_URL}/api/ads`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
-      console.log("Ad posted successfully:", response.data);
+      console.log("Din annons blev publicerad:", response.data);
       navigate("/annonser"); // Redirect to the ads page after posting
     } catch (error) {
-      setError(error.response?.data?.message || "Failed to post the ad");
+      setError(
+        error.response?.data?.message || "Kunde inte publicera din annons"
+      );
     }
   };
 
@@ -147,24 +147,20 @@ const AddAdForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="quality" className="block mb-1">
-            Mängd kvar
+          <label htmlFor="amountLeft" className="block mb-1">
+            Mängd kvar (ml)
           </label>
-          <select
-            id="quality"
-            value={quality}
-            onChange={(e) => setQuality(e.target.value)}
+          <input
+            type="number"
+            id="amountLeft"
+            value={amountLeft}
+            onChange={(e) => setAmountLeft(e.target.value)}
             required
+            min="0"
+            max="100"
             className="w-full px-3 py-2 border rounded-md"
-          >
-            <option value="">Välj mängd</option>
-            <option value="new">(100%)</option>
-            <option value="likeNew">(90-99%)</option>
-            <option value="veryGood">(80-89%)</option>
-            <option value="good">(70-79%)</option>
-            <option value="fair">(60-69%)</option>
-            <option value="poor">(60%)</option>
-          </select>
+            placeholder="Ange mängd i ml"
+          />
         </div>
         <button
           type="submit"
