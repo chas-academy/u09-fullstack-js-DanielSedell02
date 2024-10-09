@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config/api";
 
 const AdminUserCreate = () => {
   const [username, setUsername] = useState("");
@@ -17,7 +18,7 @@ const AdminUserCreate = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:3000/api/admin/users",
+        `${API_URL}/api/admin/users`,
         { username, email, password },
         {
           headers: {

@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { AuthProvider, useAuth } from "./AuthContext";
 import { DarkModeProvider, useDarkMode } from "./DarkModeContext";
+import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
 
 // Import components
 import Navbar from "./components/Navbar";
@@ -36,6 +37,57 @@ const ProtectedAdminRoute = ({ children, adminOnly = false }) => {
   }
   return children;
 };
+
+function Footer({ isDarkMode }) {
+  return (
+    <footer
+      className={`${
+        isDarkMode ? "bg-gray-800 text-gray-200" : "bg-gray-100 text-gray-800"
+      } py-6 mt-8`}
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          <div className="mb-4 md:mb-0">
+            <img
+              src="/logo.png"
+              alt="ScentSaving Logo"
+              className="h-8 w-auto"
+            />
+          </div>
+          <div className="flex space-x-4 mb-4 md:mb-0">
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-purple-500"
+            >
+              <FaInstagram size={24} />
+            </a>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-500"
+            >
+              <FaFacebook size={24} />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-400"
+            >
+              <FaTwitter size={24} />
+            </a>
+          </div>
+          <div>
+            <p>&copy; 2024 ScentSaving. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
 
 function AppRoutes() {
   const { isDarkMode } = useDarkMode();
@@ -73,15 +125,7 @@ function AppRoutes() {
             </Route>
           </Routes>
         </main>
-        <footer
-          className={`${
-            isDarkMode
-              ? "bg-gray-800 text-gray-200"
-              : "bg-gray-100 text-gray-800"
-          } text-center py-4 mt-8`}
-        >
-          <p>&copy; 2024 ScentSaving. All rights reserved.</p>
-        </footer>
+        <Footer isDarkMode={isDarkMode} />
       </div>
     </Router>
   );

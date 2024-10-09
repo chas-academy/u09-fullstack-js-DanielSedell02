@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useAuth } from "../AuthContext";
+import { API_URL } from "../config/api";
 
 const AdminUserList = () => {
   const [users, setUsers] = useState([]);
@@ -12,14 +13,11 @@ const AdminUserList = () => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(
-          "http://localhost:3000/api/admin/users",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${API_URL}/api/admin/users`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setUsers(response.data);
       } catch (err) {
         console.error("Error fetching users:", err);
@@ -38,7 +36,7 @@ const AdminUserList = () => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
         const token = localStorage.getItem("token");
-        await axios.delete(`http://localhost:3000/api/admin/users/${id}`, {
+        await axios.delete(`${API_URL}/api/admin/users/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

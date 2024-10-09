@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
 import axios from "axios";
 import LetterPullupComponent from "../components/letter-pullup";
+import { API_URL } from "../config/api";
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -31,9 +32,7 @@ const Home = () => {
     if (query.length > 2) {
       setIsSearching(true);
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/search?q=${query}`
-        );
+        const response = await axios.get(`${API_URL}/api/search?q=${query}`);
         setSearchResults(response.data);
         setShowDropdown(true);
       } catch (error) {

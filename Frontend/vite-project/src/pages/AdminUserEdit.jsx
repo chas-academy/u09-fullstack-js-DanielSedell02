@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { API_URL } from "../config/api";
 
 const AdminUserEdit = () => {
   const [username, setUsername] = useState("");
@@ -13,14 +14,11 @@ const AdminUserEdit = () => {
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(
-          `http://localhost:3000/api/admin/users/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${API_URL}/api/admin/users/${id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setUsername(response.data.username);
         setEmail(response.data.email);
       } catch (error) {
@@ -36,7 +34,7 @@ const AdminUserEdit = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:3000/api/admin/users/${id}`,
+        `${API_URL}/api/admin/users/${id}`,
         { username, email },
         {
           headers: {
