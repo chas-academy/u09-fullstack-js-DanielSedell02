@@ -44,13 +44,13 @@ En användarstudie genomfördes med olika åldersgrupper och könen. Svaren saml
 - **Recensioner och Omdömen**: Tillåt användarna att lämna och läsa betyg samt recensioner för att skapa ett community kring produkterna.
 - **Säkerhet och Betalning**: Fokusera på att ha säkra betalningsmetoder och tydlig leveransinformation för att öka kundernas förtroende.
 
-### Funktioner:
+## Funktioner
 - Användare kan registrera sig, logga in, skapa och hantera annonser.
 - Användaren kan lägga till och ta bort parfymer till och från sin varukorg.
 - Admin kan använda sig av CRUD för att hantera användare
 - Möjlighet att ladda upp bilder och lägga till beskrivningar och detaljer om produkten.
 
-### Teknologier
+## Teknologier
 - **Frontend**: Vite (React), tailwindcss 
 - **Backend**: Node.js, Express
 - **Databas**: MongoDB
@@ -66,7 +66,10 @@ En användarstudie genomfördes med olika åldersgrupper och könen. Svaren saml
    ```bash
    cd u09-fullstack-js-DanielSedell02
    ```
-
+Sedan för att installera Tailwind Css så skriver du: 
+```npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+ ```
 ## Backend-uppsättning
 
 1. Gå till `Backend`-mappen:
@@ -88,6 +91,12 @@ En användarstudie genomfördes med olika åldersgrupper och könen. Svaren saml
    ```
    PORT=3000
    DB_URI=mongodb://din_mongodb_uri
+   MONGO_USERNAME=
+MONGO_PASSWORD=
+MONGO_CLUSTER=
+MONGO_DBNAME=
+JWT_SECRET=
+MONGODB_URI=
    ```
 
 4. Starta backend-servern:
@@ -110,13 +119,42 @@ En användarstudie genomfördes med olika åldersgrupper och könen. Svaren saml
    npm run dev
    ```
 
+   
+
 ## API-dokumentation
 
-Backend tillhandahåller flera RESTful API-endpoints:
+Jag använde mig av insomnia för API-testning och utveckling.
 
-- `POST /api/login`: Logga in en användare.
-- `POST /api/register`: Registrera en ny användare.
-- `GET /api/users`: Hämta alla registrerade användare.
+# User Registration
+
+**Method:** POST  
+**URL:** [http://localhost:3000/api/auth/register](http://localhost:3000/api/auth/register)
+
+**Body (JSON):**
+```json
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "password123"
+}
+```
+# User Login
+
+**Method:** POST  
+**URL:** [http://localhost:3000/api/auth/login](http://localhost:3000/api/auth/login)
+
+**Body (JSON):**
+```json
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+
+```
+
+ Genom att använda Insomnia för att testa registrerings- och inloggningsfunktionerna har jag kunnat säkerställa att dessa viktiga delar av hemsidan fungerar som de ska. Verktygets funktioner för snabb feedback, enkel felsökning och effektiv validering har varit avgörande för att skapa en användarvänlig applikation.
+
+
 
 ## Licens
 
