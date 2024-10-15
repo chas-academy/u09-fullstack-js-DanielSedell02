@@ -5,23 +5,22 @@ import { useAuth } from "../AuthContext.jsx";
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const { login } = useAuth();
+  const { login, loading, error } = useAuth(); // Hämtar loading och error från useAuth
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+
     try {
-      const user = await login(username, password);
-      // Redirect based on user role
+      const user = await login(username, password); // Anropar login från useAuth
+      // Redirect baserat på användarroll
       if (user.role === "admin") {
         navigate("/admin");
       } else {
         navigate("/");
       }
     } catch (error) {
-      setError(error.message || "Inloggningen misslyckades");
+      console.error("Login failed", error);
     }
   };
 
@@ -33,6 +32,7 @@ const LoginForm = () => {
             Logga in på ditt konto
           </h2>
         </div>
+        {/* Visar felmeddelandet om det finns ett */}
         {error && <p className="text-red-500 text-center">{error}</p>}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" value="true" />
@@ -102,8 +102,10 @@ const LoginForm = () => {
             <button
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+              disabled={loading} // Knappen är inaktiv medan inloggningen pågår
             >
-              Logga in
+              {loading ? "Laddar..." : "Logga in"}{" "}
+              {/* Visar "Laddar..." när loading är true */}
             </button>
           </div>
         </form>

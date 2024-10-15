@@ -23,11 +23,11 @@ const login = (username, password) => {
       username,
       password,
     },
-    { withCredentials: true }
+    { withCredentials: true } // Skickar med cookies för autentisering
   );
 };
 const logout = () => {
-  localStorage.removeItem("user");
+  localStorage.removeItem("user"); // Tar bort användardata från localStorage
 };
 
 const getCurrentUser = () => {
