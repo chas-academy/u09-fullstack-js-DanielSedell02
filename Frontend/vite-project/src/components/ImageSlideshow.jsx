@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_URL } from "@/config/api";
 
 const ImageSlideshow = ({ images, alt }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -18,7 +19,7 @@ const ImageSlideshow = ({ images, alt }) => {
   return (
     <div className="relative">
       <img
-        src={`http://localhost:3000${images[currentImageIndex]}`}
+        src={`${API_URL}${images[currentImageIndex]}`}
         alt={`${alt} - Image ${currentImageIndex + 1}`}
         className="w-full h-48 object-cover mb-2 rounded"
       />
