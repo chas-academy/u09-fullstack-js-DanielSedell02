@@ -7,7 +7,6 @@ const urlsToCache = [
   "/icons/android-chrome-512x512.png",
 ];
 
-// Install the service worker
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -17,19 +16,17 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// Fetch cached content
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {
-        return response; // return cached content
+        return response;
       }
-      return fetch(event.request); // fetch from the network
+      return fetch(event.request);
     })
   );
 });
 
-// Activate and update the service worker
 self.addEventListener("activate", (event) => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
