@@ -18,6 +18,28 @@
       "type": "image/png"
     }
   ],
+  "screenshots": [
+    {
+      "src": "/screenshots/Annonser-page-desktop.png",
+      "sizes": "1080x1920",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/Annonser-page-mobile.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/Om-oss-desktop.png",
+      "sizes": "1080x1920",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/Om-oss-mobile.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ],
   "start_url": "https://scentsaving.netlify.app/",
   "background_color": "#ffffff",
   "display": "standalone",
