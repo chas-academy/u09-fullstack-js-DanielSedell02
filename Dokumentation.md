@@ -54,7 +54,8 @@ En användarstudie genomfördes med olika åldersgrupper och könen. Svaren saml
 - **Frontend**: Vite (React), tailwindcss 
 - **Backend**: Node.js, Express
 - **Databas**: MongoDB
-- **Övrigt**: JavaScript (ES6+), CSS, HTML
+- **autentisering**: JWT för användar autentisering 
+- **Deployment**: Plattform som stöder node.js Render för backend och netifly för frontend
 
 ## Installation
 
