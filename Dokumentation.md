@@ -93,11 +93,11 @@ npx tailwindcss init -p
    PORT=3000
    DB_URI=mongodb://din_mongodb_uri
    MONGO_USERNAME=
-MONGO_PASSWORD=
-MONGO_CLUSTER=
-MONGO_DBNAME=
-JWT_SECRET=
-MONGODB_URI=
+   MONGO_PASSWORD=
+   MONGO_CLUSTER=
+   MONGO_DBNAME=
+   JWT_SECRET=
+   MONGODB_URI=
    ```
 
 4. Starta backend-servern:
