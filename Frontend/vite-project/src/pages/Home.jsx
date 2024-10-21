@@ -10,6 +10,7 @@ const Home = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [ads, setAds] = useState([]); // <-- State to store ads
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -45,6 +46,19 @@ const Home = () => {
       setShowDropdown(false);
     }
   };
+
+  // Fetch ads data on component mount
+  useEffect(() => {
+    const fetchAds = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/ads`);
+        setAds(response.data);
+      } catch (err) {
+        console.error("Failed to fetch ads:", err);
+      }
+    };
+    fetchAds();
+  }, []);
 
   return (
     <div className="container mx-auto mt-8 px-4">
@@ -99,20 +113,20 @@ const Home = () => {
         </p>
       </div>
 
+      {/* Display only the ad images */}
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-        {[1, 2, 3].map((index) => (
+        {ads.map((ad) => (
           <div
-            key={index}
-            className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            key={ad._id}
+            className="relative overflow-hidden rounded-lg shadow-lg"
           >
-            <img
-              src="/parfym1.webp"
-              alt={`Perfume ${index}`}
-              className="w-full h-auto object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-              <p className="text-white text-lg font-semibold">Upptäck mera</p>
-            </div>
+            {ad.imageUrls && ad.imageUrls.length > 0 && (
+              <img
+                src={ad.imageUrls[0]} // Display only the first image of each ad
+                alt={`Perfume ${ad.fragranceName}`}
+                className="w-full h-auto object-cover"
+              />
+            )}
           </div>
         ))}
       </div>
