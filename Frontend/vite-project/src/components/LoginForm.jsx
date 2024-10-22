@@ -5,22 +5,26 @@ import { useAuth } from "../AuthContext.jsx";
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { login, loading, error } = useAuth(); // Hämtar loading och error från useAuth
+  const { login, loading, error, setError } = useAuth(); // Added setError to reset error
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Reset error before starting new login attempt
+    setError(null);
+
     try {
-      const user = await login(username, password); // Anropar login från useAuth
-      // Redirect baserat på användarroll
+      const user = await login(username, password); // Call login from useAuth
+      // Redirect based on user role
       if (user.role === "admin") {
         navigate("/admin");
       } else {
         navigate("/");
       }
-    } catch (error) {
-      console.error("Login failed", error);
+    } catch (err) {
+      console.error("Login failed", err);
+      setError("Fel användaruppgifter"); // Set error to Swedish message if login fails
     }
   };
 
@@ -32,8 +36,10 @@ const LoginForm = () => {
             Logga in på ditt konto
           </h2>
         </div>
-        {/* Visar felmeddelandet om det finns ett */}
+
+        {/* Display error message */}
         {error && <p className="text-red-500 text-center">{error}</p>}
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm -space-y-px">
@@ -102,13 +108,14 @@ const LoginForm = () => {
             <button
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-              disabled={loading} // Knappen är inaktiv medan inloggningen pågår
+              disabled={loading} // Button is disabled when loading is true
             >
               {loading ? "Laddar..." : "Logga in"}{" "}
-              {/* Visar "Laddar..." när loading är true */}
+              {/* Show "Laddar..." during loading */}
             </button>
           </div>
         </form>
+
         <div className="text-center mt-4">
           <Link
             to="/register"

@@ -54,7 +54,7 @@ const Home = () => {
         const response = await axios.get(`${API_URL}/api/ads`);
         setAds(response.data);
       } catch (err) {
-        console.error("Failed to fetch ads:", err);
+        console.error("Misslyckades att hämta annonserna:", err);
       }
     };
     fetchAds();
@@ -113,20 +113,25 @@ const Home = () => {
         </p>
       </div>
 
-      {/* Display only the ad images */}
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-        {ads.map((ad) => (
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {ads.slice(0, 3).map((ad) => (
           <div
             key={ad._id}
-            className="relative overflow-hidden rounded-lg shadow-lg"
+            className="relative bg-white border border-gray-200 rounded-lg shadow-lg p-4 overflow-hidden"
           >
             {ad.imageUrls && ad.imageUrls.length > 0 && (
-              <img
-                src={ad.imageUrls[0]} // Display only the first image of each ad
-                alt={`Perfume ${ad.fragranceName}`}
-                className="w-full h-auto object-cover"
-              />
+              <Link to={`/ad/${ad._id}`}>
+                <img
+                  src={`${API_URL}${ad.imageUrls[0]}`}
+                  alt={`Perfume ${ad.fragranceName}`}
+                  className="w-full h-48 object-cover rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105"
+                />
+              </Link>
             )}
+            <div className="mt-4 text-center">
+              <h3 className="text-lg font-semibold">{ad.fragranceName}</h3>
+              {/* Optionally, you can add more text about the ad here */}
+            </div>
           </div>
         ))}
       </div>
