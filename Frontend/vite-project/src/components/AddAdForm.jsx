@@ -35,11 +35,6 @@ const AddAdForm = () => {
       return;
     }
 
-    if (images.length === 0) {
-      setError("Ladda upp minst en bild");
-      return;
-    }
-
     const formData = new FormData();
     formData.append("fragranceName", fragranceName);
     formData.append("price", price);
@@ -71,12 +66,17 @@ const AddAdForm = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4">Publicera en ny annons</h2>
+    <div className="max-w-lg mx-auto mt-8 px-4 sm:px-6 lg:px-8">
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        Publicera en ny annons
+      </h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="fragranceName" className="block mb-1">
+          <label
+            htmlFor="fragranceName"
+            className="block mb-1 text-sm sm:text-base"
+          >
             Parfymens namn
           </label>
           <input
@@ -85,11 +85,11 @@ const AddAdForm = () => {
             value={fragranceName}
             onChange={(e) => setFragranceName(e.target.value)}
             required
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border rounded-md text-sm sm:text-base"
           />
         </div>
         <div>
-          <label htmlFor="price" className="block mb-1">
+          <label htmlFor="price" className="block mb-1 text-sm sm:text-base">
             Pris (SEK)
           </label>
           <input
@@ -100,11 +100,11 @@ const AddAdForm = () => {
             required
             min="0"
             step="0.01"
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border rounded-md text-sm sm:text-base"
           />
         </div>
         <div>
-          <label htmlFor="images" className="block mb-1">
+          <label htmlFor="images" className="block mb-1 text-sm sm:text-base">
             Bilder (Max 3)
           </label>
           <input
@@ -113,9 +113,9 @@ const AddAdForm = () => {
             accept="image/*"
             multiple
             onChange={handleImageChange}
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border rounded-md text-sm sm:text-base"
           />
-          <div className="mt-2 flex space-x-2">
+          <div className="mt-2 flex flex-wrap space-x-2">
             {images.map((image, index) => (
               <div key={index} className="relative">
                 <img
@@ -135,7 +135,10 @@ const AddAdForm = () => {
           </div>
         </div>
         <div>
-          <label htmlFor="description" className="block mb-1">
+          <label
+            htmlFor="description"
+            className="block mb-1 text-sm sm:text-base"
+          >
             Beskrivning
           </label>
           <textarea
@@ -143,11 +146,11 @@ const AddAdForm = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border rounded-md text-sm sm:text-base"
           />
         </div>
         <div>
-          <label htmlFor="quality" className="block mb-1">
+          <label htmlFor="quality" className="block mb-1 text-sm sm:text-base">
             Mängd kvar (ml)
           </label>
           <input
@@ -158,13 +161,13 @@ const AddAdForm = () => {
             required
             min="0"
             max="100"
-            className="w-full px-3 py-2 border rounded-md"
+            className="w-full px-3 py-2 border rounded-md text-sm sm:text-base"
             placeholder="Ange mängd i ml"
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700"
+          className="w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition-colors duration-200 text-sm sm:text-base"
         >
           Posta annons
         </button>
